@@ -10,3 +10,12 @@ Ideatron is a game idea generator made in Python. Initially made on the Scratch 
 * A very basic GUI
 * Modifying the lists
 * Saving and loading the lists
+## Building the application
+To build the app, you will need:
+* Tkinter
+* PIL (pillow)
+* Webbrowser
+* os
+* sys
+* datetime
+* random
