@@ -24,9 +24,9 @@ To build the app, you will need:
 * Clone or download this repository to a folder
 * Open the command prompt
 * Go to the folder where `ideatron.py` is located
-* Run `py -m PyInstaller --noconsole --icon=media/ideatron.ico --noconfig ideatron.py`
+* Run `py -m PyInstaller --noconsole --icon=media/ideatron.ico --noconfirm ideatron.py`
 * Copy `media/` to `dist/Ideatron/media/`
 * Go to `[ideatron.py folder]/dist/Ideatron`
 * Run `ideatron.exe`
 #### Automatic building
-In the releases there is a batch file called `build.bat`. Download the repo and run the script. It will automatically build everything for you, including copying the `media/` folder.
+In the releases there is a batch file called `auto-build.bat`. Download the repo and run the script. It will automatically build everything for you, including copying the `media/` folder.
