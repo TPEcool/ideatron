@@ -378,7 +378,7 @@ def modify():
     buttonFrame.grid(row=1,column=0)
 
     selectionLabel = tk.Label(buttonFrame,text='Selection: '+sel.get())
-    selectionLabel.grid(row=1,column=0,padx=10,pady=10)
+    selectionLabel.grid(row=1,column=0,padx=10,pady=10,columnspan=3)
 
     addBtn = tk.Button(buttonFrame,text="Add",command = addOpt)
     addBtn.grid(row=0,column=1,padx=5,ipadx=10)
