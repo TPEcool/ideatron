@@ -22,10 +22,12 @@ import sys
 import webbrowser as web
 from PIL import ImageTk as it, Image as img
 
-version = "2.2"
+version = "2.3"
 editorver = "1.6"
 year = "2023"
 editoryear = '2023'
+
+print('Version type is '+('prerelease' if 'pre' in version else ('development' if 'dev' in version else 'release')))
 
 os.makedirs(os.getcwd()+'/saves',exist_ok=True)
 os.makedirs(os.getcwd()+'/saves/lists',exist_ok=True)
@@ -123,6 +125,8 @@ def listOpt():
 
 spin_var = tk.StringVar(app)
 spin_var.set(str(rd.randint(-10000,10000)))
+
+rd.seed(int(spin_var.get()))
 
 def git():
     web.open("https://github.com/TPEcool/ideatron")
