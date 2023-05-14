@@ -23,7 +23,7 @@ import webbrowser as web
 from PIL import ImageTk as it, Image as img
 
 version = "2.2"
-editorver = "1.5"
+editorver = "1.6"
 year = "2023"
 editoryear = '2023'
 
@@ -32,23 +32,23 @@ os.makedirs(os.getcwd()+'/saves/lists',exist_ok=True)
 
 app = tk.Tk()
 
-def clamp(i,d,u):
-    if i<d:
-        return d
-    elif i>u:
-        return u
+def clamp(inp,down,up):
+    if inp<down:
+        return down
+    elif inp>up:
+        return up
     else:
-        return i
+        return inp
 
 app.resizable(False,False)
 app.geometry("450x120")
 app.title("Ideatron v."+version)
-app.iconphoto(False,tk.PhotoImage(file='media/ideatron.png'))
+app.iconbitmap('media/ideatron.ico')
 
-git_img = it.PhotoImage(img.open('media/icons/github.png'))
-wiki_img = it.PhotoImage(img.open('media/icons/wikipedia.png'))
-scratch_img = it.PhotoImage(img.open('media/icons/scratch.webp'))
-editor_img = it.PhotoImage(img.open('media/icons/editor.png'))
+git_img = it.PhotoImage(img.open(os.getcwd()+'/media/icons/github.png'))
+wiki_img = it.PhotoImage(img.open(os.getcwd()+'/media/icons/wikipedia.png'))
+scratch_img = it.PhotoImage(img.open(os.getcwd()+'/media/icons/scratch.webp'))
+editor_img = it.PhotoImage(img.open(os.getcwd()+'/media/icons/editor.png'))
 
 class game:
     def __init__(self,genre,subgenre,music,char,gtype,eng):
@@ -328,52 +328,51 @@ def modify():
     listScroll.config(command = listBox.yview)
 
     def addOpt():
-
-        confirm = msg.askyesno(title='Are you sure you want to add this option?',message='Are you sure you want to add this option to the list? If there are any grammatical mistakes, you will have to load a save or restart the app!')
-
-        if confirm==True:
-            listBox.insert(tk.END,listField.get())
-            if listField.get()!='' and not ('@' in listField.get() or '|' in listField.get()):
-                if sel.get()=='genres':
-                    genres.append(listField.get())
-                elif sel.get()=='subgenres':
-                    subgenres.append(listField.get())
-                elif sel.get()=='soundtrack types':
-                    soundtrack.append(listField.get())
-                elif sel.get()=='characters':
-                    characters.append(listField.get())
-                elif sel.get()=='game types':
-                    gametypes.append(listField.get())
-                elif sel.get()=='engines':
-                    engines.append(listField.get())
-                else:
-                    msg.showerror(title='No container selected!',message='Please load a container from the "Load" menu and try again.')
-            elif  ('@' in listField.get()) or ('|' in listField.get()):
-                msg.showerror(title='Foreign chars',message='The entered text contains "@" or "|" characters! They are not allowed because they are used for .list file saving.')
+        listBox.insert(tk.END,listField.get())
+        if listField.get()!='' and not ('@' in listField.get() or '|' in listField.get()):
+            if sel.get()=='genres':
+                genres.append(listField.get())
+            elif sel.get()=='subgenres':
+                subgenres.append(listField.get())
+            elif sel.get()=='soundtrack types':
+                soundtrack.append(listField.get())
+            elif sel.get()=='characters':
+                characters.append(listField.get())
+            elif sel.get()=='game types':
+                gametypes.append(listField.get())
+            elif sel.get()=='engines':
+                engines.append(listField.get())
             else:
-                msg.showerror(title='The field is empty!',message='Please enter something into the text field and try again.')
-            print('Added to list!')
+                    msg.showerror(title='No container selected!',message='Please load a container from the "Load" menu and try again.')
+        elif  ('@' in listField.get()) or ('|' in listField.get()):
+            msg.showerror(title='Foreign chars',message='The entered text contains "@" or "|" characters! They are not allowed because they are used for .list file saving.')
+        else:
+            msg.showerror(title='The field is empty!',message='Please enter something into the text field and try again.')
+        print('Added to list!')
 
     def delOpt():
-        match sel.get():
-            case 'genres':
-                genres.pop(listBox.curselection()[0])
-                selectGenres()
-            case 'subgenres':
-                subgenres.pop(listBox.curselection()[0])
-                selectSubs()
-            case 'soundtrack types':
-                soundtrack.pop(listBox.curselection()[0])
-                selectMus()
-            case 'characters':
-                characters.pop(listBox.curselection()[0])
-                selectChars()
-            case 'game types':
-                gametypes.pop(listBox.curselection()[0])
-                selectTypes()
-            case 'engines':
-                engines.pop(listBox.curselection()[0])
-                selectEngines()
+        if len(listBox.curselection)==0:
+            msg.showerror('No selection','The list selection is empty! Please select something and try again.')
+        else:
+            match sel.get():
+                case 'genres':
+                    genres.pop(listBox.curselection()[0])
+                    selectGenres()
+                case 'subgenres':
+                   subgenres.pop(listBox.curselection()[0])
+                   selectSubs()
+                case 'soundtrack types':
+                    soundtrack.pop(listBox.curselection()[0])
+                    selectMus()
+                case 'characters':
+                    characters.pop(listBox.curselection()[0])
+                    selectChars()
+                case 'game types':
+                    gametypes.pop(listBox.curselection()[0])
+                    selectTypes()
+                case 'engines':
+                    engines.pop(listBox.curselection()[0])
+                    selectEngines()
 
     buttonFrame = tk.Frame(modWi)
     buttonFrame.grid(row=1,column=0)
